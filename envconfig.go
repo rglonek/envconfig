@@ -195,13 +195,8 @@ func Process(prefix string, spec interface{}) error {
 			value, ok = lookupEnv(info.Alt)
 		}
 
-		def := info.Tags.Get("default")
-		if def != "" && !ok {
-			value = def
-		}
-
 		req := info.Tags.Get("required")
-		if !ok && def == "" {
+		if !ok {
 			if isTrue(req) {
 				key := info.Key
 				if info.Alt != "" {
